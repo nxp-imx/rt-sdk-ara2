@@ -1,0 +1,35 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-03-27T19:09:49Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.26"
+  },
+  "name": "gstreamer-plugins-ara240-v1.0.0",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/7371cd9c-1f42-4eb3-a730-a496ba0ec72b",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-7371cd9c-1f42-4eb3-a730-a496ba0ec72b",
+      "name": "gstreamer-plugins-ara240",
+      "versionInfo": "v1.0.0",
+      "licenseConcluded": "(LGPL-2.1-or-later)",
+      "licenseDeclared": "(LGPL-2.1-or-later)",
+      "downloadLocation": "https://www.nxp.com/design/design-center/development-boards-and-designs/ara-software-development-kit:ARA-SDK",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-7371cd9c-1f42-4eb3-a730-a496ba0ec72b"
+    }
+  ]
+}

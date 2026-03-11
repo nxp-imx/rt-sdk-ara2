@@ -1,0 +1,102 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-03-27T17:17:47Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.26"
+  },
+  "name": "optimum-ara-2.0.0.2",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/4d02e867-37b9-4697-810e-782e9b99ff90",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90",
+      "name": "optimum-ara",
+      "versionInfo": "2.0.0.2",
+      "licenseConcluded": "(Apache-2.0)",
+      "licenseDeclared": "(Apache-2.0)",
+      "downloadLocation": "https://www.nxp.com/design/design-center/development-boards-and-designs/ara-software-development-kit:ARA-SDK",
+      "originator": "Organization: optimum-ara",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90---599f1b93-da0d-4e63-982e-e8246823fcf1",
+      "name": "huggingface/optimum",
+      "versionInfo": "v1.6.0",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: huggingface",
+      "supplier": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "OTHER",
+          "referenceLocator": "425d1c19-aeda-4acd-ad09-2504cdd4d854",
+          "referenceType": "BlackDuck-ComponentOrigin"
+        },
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/huggingface/optimum@v1.6.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90---d073b211-4a4e-4008-bcbd-ccd75d16cdfa",
+      "name": "transformers",
+      "versionInfo": "4.55.4",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "homepage": "https://github.com/huggingface/transformers",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: huggingface",
+      "supplier": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "OTHER",
+          "referenceLocator": "513f54ea-22c1-445c-ad3e-007353b0dddd",
+          "referenceType": "BlackDuck-ComponentOrigin"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:huggingface:transformers:4.55.4:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:pypi_package:transformers:4.55.4:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/huggingface/transformers@v4.55.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90---599f1b93-da0d-4e63-982e-e8246823fcf1"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-4d02e867-37b9-4697-810e-782e9b99ff90---d073b211-4a4e-4008-bcbd-ccd75d16cdfa"
+    }
+  ]
+}
