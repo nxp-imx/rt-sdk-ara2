@@ -245,7 +245,7 @@ Once installation is complete, you can start using the Ara240 NPU with the inclu
 Download pre-compiled models for testing. Run the download script to get different flavours of YOLOv8 models.
 
 ```bash
-fetch_models nxp/YOLOv8
+fetch_models --repo-id nxp/YOLOv8
 ```
 
 ### Quick Performance Test
