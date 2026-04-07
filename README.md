@@ -207,7 +207,26 @@ Firmware flashing is a one-time activity and persists across reboots. If the fir
 program_flash.sh
 ```
 
-> **Important:** Always reboot the board after upda firmware to ensure the new version is properly loaded and initialized.
+Reboot the board after firmware update to ensure the new version is properly loaded and initialized.
+
+<details>
+<summary><b>Known Issue: FRDM i.MX8M Plus freeze when updating ARA240 Firmware</b></summary>
+
+   On FRDM i.MX 8M PLUS during firmware update the `program_flash.sh` script  in BSP 6.18.2_1.0.0 can cause the board to freeze, resulting in a failed flashing process.
+
+   **Workaround:**
+   1. Stop at uboot.
+   2. Append `pcie_aspm=off` to the `mmcargs` and then continue boot
+
+   ```
+   u-boot=> editenv mmcargs
+   edit: setenv bootargs ${jh_clk} ${mcore_clk} console=${console} root=${mmcroot} pcie_aspm=off
+   u-boot=> boot
+   ```
+
+   For more details on this known issue or any other, visit the [Release Note Document].
+
+   </details>
 
 ### Step 8: Verify Service Status (optional)
 
@@ -238,7 +257,7 @@ ps -eaf | grep proxy_ara240
 Once installation is complete, you can start using the Ara240 NPU with the included helper scripts and APIs.
 
 > [!WARNING]
-> At this point we recomend to switch to a SSH connection for the best experience.
+> At this point we recommend to switch to a SSH connection for the best experience.
 
 ### Download Sample Models
 
@@ -302,7 +321,7 @@ chip_info.sh
 - DDR and flash information
 - Life cycle and chip part type
 
-> **Note:** This script runs automatically twice during Ara240 boot-up and provides a quick health check of the device.
+This script runs automatically twice during Ara240 boot-up and provides a quick health check of the device.
 
 ### program_flash.sh - Firmware Update
 
@@ -312,7 +331,7 @@ Update the Ara240 NPU firmware to the required version:
 program_flash.sh
 ```
 
-> **Important:** Always reboot the board after running this script to ensure the new firmware is fully applied and the device state is clean.
+Always reboot the board after running this script to ensure the new firmware is fully applied and the device state is clean.
 
 ### fetch_models - Download Pre-compiled Models
 
@@ -326,14 +345,22 @@ This command shows all supported models available to fetch from Hugging Face.
 
 **Supported models:**
 
-- LLMs/VLMs:
-   - Qwen2.5-7B-Instruct (For Ara240)
-   - Qwen2.5-Coder-1.5B (For Ara240)
-   - Qwen2.5-VL-7B-Instruct (For Ara240)
-- YOLOv8:
+<details>
+<summary>LLMs/VLMs</summary>
+
+- Qwen2.5-7B-Instruct (For Ara240)
+
+- Qwen2.5-Coder-1.5B (For Ara240)
+
+- Qwen2.5-VL-7B-Instruct (For Ara240)
+
+</details>
+
+<details>
+<summary>YOLOv8</summary>
+
    - detection:
       - yolov8n
-      - yolov8n-face
       - yolov8s
       - yolov8m
       - yolov8l
@@ -350,6 +377,8 @@ This command shows all supported models available to fetch from Hugging Face.
       - yolov8m-seg
       - yolov8l-seg
       - yolov8x-seg
+
+</details>
 
 ### run_model_perf.sh - Performance Benchmarking
 
@@ -582,10 +611,29 @@ The following projects depend on this SDK:
 
 | **Project**              | **Repository** | **Version/Tag** |
 | ------------------------ | -------------- | ------------------ |
-| eiq-aaf-connector        | https://github.com/nxp-imx-support/eiq-aaf-connector    | main |
+| eiq-aaf-connector        | https://github.com/nxp-imx-support/eiq-aaf-connector    | v2.0.0 |
 | ara2-vision-examples     | https://github.com/nxp-imx-support/ara2-vision-examples | lf-6.18.2-1.0.0_Q1-2026 |
 | LLM-Edge-Studio          | https://github.com/nxp-imx-support/llm-edge-studio      | v2.0.0 |
 | VLM-Edge-Studio          | https://github.com/nxp-imx-support/vlm-edge-studio      | v1.0.0 |
+
+### Known Issues
+
+The following are known issues for this release:
+
+- FRDM i.MX8M Plus freeze when updating ARA240 Firmware
+- FRDM i.MX 8MP and FRDM i.MX 95 Freeze after Firmware Upgrade
+- Model Load Stalls at ~95% in VLM-Edge-Studio and LLM-Edge-Studio
+- ara2_metrics script failure on FRDM i.MX 8MP and FRDM i.MX 95
+- Hugging Face download model silent failures under bad network conditions
+
+For more details on each known issue, please refer to the Release Notes Document.
+
+### Related Documentation
+
+- [Ara Software Development Kit](https://www.nxp.com/design/design-center/development-boards-and-designs/ara-software-development-kit:ARA-SDK)
+- [Getting Started with ARA2-M2-16G-GT](https://www.nxp.com/document/guide/getting-started-with-ara2-m2-16g-gt:GS-ARA2-M2-16G-GT?section=out-of-the-box)
+- [Packages Release Notes (for Known Issues and details on each package version)]
+
 
 ---
 
