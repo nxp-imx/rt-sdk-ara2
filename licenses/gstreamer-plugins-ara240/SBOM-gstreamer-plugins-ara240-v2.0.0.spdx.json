@@ -1,0 +1,89 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-06-08T23:13:17Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.28"
+  },
+  "name": "gstreamer-plugins-ara240-v2.0.0",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/e6149699-27ce-4765-b231-2fa242b8e418",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-e6149699-27ce-4765-b231-2fa242b8e418",
+      "name": "gstreamer-plugins-ara240",
+      "versionInfo": "v2.0.0",
+      "licenseConcluded": "(LGPL-2.0-or-later)",
+      "licenseDeclared": "(LGPL-2.0-or-later)",
+      "downloadLocation": "https://github.com/nxp-imx-support/gstreamer-plugins-ara240",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-e6149699-27ce-4765-b231-2fa242b8e418---a66b154d-2ba4-4e0a-935a-2351f300782b",
+      "name": "GStreamer",
+      "versionInfo": "0.10.20",
+      "licenseConcluded": "LGPL-2.0-or-later",
+      "licenseDeclared": "LGPL-2.0-or-later",
+      "homepage": "https://gstreamer.freedesktop.org/",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: gstreamer",
+      "supplier": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:gstreamer:good_plug-ins:0.10.20:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:gstreamer:gstreamer:0.10.20:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:gstreamer:plug-ins:0.10.20:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:gstreamer_project:gstreamer:0.10.20:*:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "SECURITY",
+          "referenceLocator": "cpe:2.3:a:oracle_linux_package:gstreamer-plugins-base-devel:0.10.20:3.0.1.el5_3:*:*:*:*:*:*",
+          "referenceType": "cpe23Type"
+        },
+        {
+          "referenceCategory": "OTHER",
+          "referenceLocator": "e9bfa8bb-d0c0-45a1-b87a-02238154998b",
+          "referenceType": "BlackDuck-ComponentOrigin"
+        },
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/gstreamer/gstreamer@RELEASE-0_10_20",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-e6149699-27ce-4765-b231-2fa242b8e418"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-e6149699-27ce-4765-b231-2fa242b8e418",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-e6149699-27ce-4765-b231-2fa242b8e418---a66b154d-2ba4-4e0a-935a-2351f300782b"
+    }
+  ]
+}
