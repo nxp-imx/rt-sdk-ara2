@@ -11,8 +11,6 @@
 
 Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs 🚀🧠💻
 
-<div align="left">
-
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
@@ -101,7 +99,7 @@ flowchart LR
    class h hardwareLayer
 ```
 
-<div align="left">
+</div>
 
 ---
 
@@ -188,7 +186,8 @@ Wait approximately **60-70 seconds** for the boot process to complete. You shoul
 [   60.679857] bash[868]: Logs saved in: /usr/share/rt-sdk-ara240/saved_logs/rt-sdk-ara2_logs.txt
 ```
 
-> **Note:** The boot process includes loading the `uiodma.ko` driver, performing Ara240 hardware bringup, and launching the proxy daemon.
+> [!NOTE]
+> The boot process includes loading the `uiodma.ko` driver, performing Ara240 hardware bringup, and launching the proxy daemon.
 
 ### Step 5: Verify Firmware Version
 
@@ -215,25 +214,6 @@ program_flash.sh
 ```
 
 Reboot the board after firmware update to ensure the new version is properly loaded and initialized.
-
-<details>
-<summary><b>Known Issue: FRDM i.MX8M Plus freeze when updating ARA240 Firmware</b></summary>
-
-   On FRDM i.MX 8M PLUS during firmware update the `program_flash.sh` script  in BSP 6.18.2_1.0.0 can cause the board to freeze, resulting in a failed flashing process.
-
-   **Workaround:**
-   1. Stop at uboot.
-   2. Append `pcie_aspm=off` to the `mmcargs` and then continue boot
-
-   ```
-   u-boot=> editenv mmcargs
-   edit: setenv bootargs ${jh_clk} ${mcore_clk} console=${console} root=${mmcroot} pcie_aspm=off
-   u-boot=> boot
-   ```
-
-   For more details on this known issue or any other, visit the [Release Note Document].
-
-   </details>
 
 ### Step 8: Verify Service Status (optional)
 
@@ -308,7 +288,10 @@ ara2_metrics.sh
 - **7** - Print NPU state
 - **0** - Exit
 
-> **Use case:** This tool is invaluable during benchmarking or model execution. You can correlate model performance with thermal behavior and utilization to identify bottlenecks. For example, if performance drops, you can verify whether the NPU is throttling due to temperature or experiencing memory pressure.
+<details>
+<summary>Tool Use Case</summary>
+This tool is invaluable during benchmarking or model execution. You can correlate model performance with thermal behavior and utilization to identify bottlenecks. For example, if performance drops, you can verify whether the NPU is throttling due to temperature or experiencing memory pressure.
+</details>
 
 ### chip_info.sh - Device Summary
 
@@ -417,7 +400,10 @@ Available Models in detection
 
 **Key metric:** Look for **HW IPS** (Hardware Inferences Per Second) in the results. This represents the maximum throughput the Ara240 NPU can achieve for the selected model under current conditions.
 
-> **Note:** IPS values may vary depending on thermal conditions, system load, interface type (PCIe), and whether the benchmark runs continuously or in bursts.
+<details>
+<summary>benchmark Aknoledgment</summary>
+- IPS values may vary depending on thermal conditions, system load, interface type (PCIe), and whether the benchmark runs continuously or in bursts.
+</details>
 
 **Customizing benchmark parameters:**
 
@@ -498,8 +484,10 @@ sudo systemctl stop ara2-device.target
 aam status
 ```
 
-> [!INFO]
-> **Use case:** Disable automatic management during development or debugging when you need precise control over service life cycle. Enable it for production deployments where hot-plug support is desired.
+<details>
+<summary>When to disable AAM</summary>
+Disable automatic management during development or debugging when you need precise control over service life cycle. Enable it for production deployments where hot-plug support is desired.
+</details>
 
 ### Configuration File
 
@@ -571,8 +559,6 @@ aam disable
 ```bash
 aam enable
 ```
-
-> **Note:** Please notice in order to disable at startup you need to use aam utility otherwise the rule will continue kicking the ARA240 Stack.
 
 ---
 
@@ -658,7 +644,8 @@ To manually unload the driver:
 rmmod uiodma
 ```
 
-> **Note:** The driver is essential for Ara240 NPU operation. Do not unload it while running inference workloads.
+> [!IMPORTANT]
+> The driver is essential for Ara240 NPU operation. Do not unload it while running inference workloads.
 
 ---
 
@@ -678,12 +665,9 @@ The Debian package installs components to the following locations:
 - `/usr/lib/gstreamer-1.0/` - GStreamer plugins for video inference pipelines
 
 ### Headers and Python Modules
+On `-dev` Debian Package only comes C/C++ headers file.
 - `/usr/include/sdk_ara/` - C/C++ headers (dvapi.h, dv_status_codes.h, etc.)
 - `/usr/share/rt-sdk-ara240_2.1.1/include/` - Python bindings (dvapi.py)
-
-> **IMPORTANT ‼️**: `/usr/include/sdk_ara/` is part of the `-dev` package. **It is not in main package**. In order
-> to have those files in the File System you need to install `-dev` package as
-> well.
 
 ### Runtime Artifacts
 - `/usr/share/rt-sdk-ara240_2.1.1/optimum-ara/` - Optimum-Ara framework, examples, and documentation
@@ -706,14 +690,11 @@ The Debian package installs components to the following locations:
 - `/usr/share/rt-sdk-ara240/saved_logs/rt-sdk-ara2_logs.txt` - Service logs
 
 ### Documentation
+On `-doc` Debian Package.
 - `/usr/share/doc/rt-sdk-ara2/LICENSE.txt` - License information
 
-> **IMPORTANT ‼️**: `/usr/share/doc/rt-sdk-ara2/` is part of the `-doc` package. **It is not in main package**. In order
-> to have those files in the File System you need to install `-doc` package as
-> well.
-
-> [!INFO]
-> The `-doc` and `-dev` packages are self-contained within the `imx-nxp-ara2-2.1.1.-<commit>.bin` file, which follows the same file structure as the paths above.
+> [!NOTE]
+> The `-doc` and `-dev` packages are self-contained within the `imx-nxp-ara2-2.1.1.-<commit>.bin` file, which follows the same file structure as the paths above. In order to have those files in the File System you need to install them as well.
 
 ---
 
@@ -728,6 +709,14 @@ The Debian package installs components to the following locations:
 | Debian package     | v2.1.1      |
 | Firmware (raw)     | 131072      |
 | Firmware (display) | 2.0.0       |
+
+
+### Related Documentation
+
+All related documentation can be find in the following links:
+
+- [Ara Software Development Kit](https://www.nxp.com/design/design-center/software/embedded-software/ara-software-development-kit:ARA-SDK)
+- [Embedded Linux for i.MX Applications Processors](https://www.nxp.com/IMXLINUX)
 
 ---
 
