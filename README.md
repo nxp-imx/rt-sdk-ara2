@@ -30,7 +30,7 @@ Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs 🚀🧠💻
 - [Licensing](#%EF%B8%8F-licensing)
 
 
-> [!NOTE]
+> [!IMPORTANT]
 > Since the LF-6.18.20_2.0.0 release, the package comes prebuilt in the image. You may want to skip ahead to the [Getting Started](#-getting-started) section.
 
 ---
@@ -164,6 +164,24 @@ Install the package with automatic disk partition resizing for LLM support:
 dpkg -i imx-nxp-ara2.deb
 ```
 
+#### Step 3.1 Install from `.bin` File (alternative)
+
+To evaluate the package quickly, download the pre-compiled binary on the target device:
+
+```bash
+wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/imx-nxp-ara2-2.1.1-063d56c.bin
+chmod +x imx-nxp-ara2-2.1.1-063d56c.bin
+./imx-nxp-ara2-2.1.1-063d56c.bin
+```
+
+After executing the binary, you will be prompted to accept the LA_OPT_NXP_Software_License to proceed with the installation.
+
+> [!CAUTION]
+> - This method allows installation of the ARA240 SDK on any NXP device; however, it does not guarantee that the particular target is officially supported.
+> - The `-063d56c` suffix corresponds to BSP-LF6-18.20_2.0.0. Please consult the **Release Notes** documentation to verify the binary version compatible with your specific BSP.
+
+</details>
+
 The installation process will:
 - ⚙️ Configure systemd service (`rt-sdk-ara2.service`) for automatic startup
 - 💾 Expand system partition to maximize storage capacity
@@ -205,7 +223,6 @@ Look for the `firmware_version(raw)` field in the output:
 ```
 
 ### Step 6: Update Firmware (if needed)
-**TODO**
 
 Firmware flashing is a one-time activity and persists across reboots. If the firmware version is **not 131072**, update it:
 
