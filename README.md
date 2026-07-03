@@ -29,7 +29,6 @@ Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs 🚀🧠💻
 - [Release Notes](#-release-notes)
 - [Licensing](#%EF%B8%8F-licensing)
 
-
 > [!IMPORTANT]
 > Since the LF-6.18.20_2.0.0 release, the package comes prebuilt in the image. You may want to skip ahead to the [Getting Started](#-getting-started) section.
 
@@ -55,22 +54,22 @@ The **imx-nxp-ara2** Debian package provides a complete runtime environment for 
 ```mermaid
 flowchart LR
    a["Application"]
-   
+
    subgraph Python
       b["Optimum-Ara Framework"]
       c["dvapi.py - Python Bindings"]
    end
-   
+
    subgraph GST
       y["GstdvPlugins"]
       z["ara_vision_infer"]
    end
-   
+
    d["libaraclient.so - Client Library"]
    e["Proxy Daemon"]
    f["uiodma.ko - UIO DMA Driver"]
    h["ARA240 NPU Hardware"]
-   
+
    a --> Python
    a --> GST
    Python --> d
@@ -107,11 +106,11 @@ flowchart LR
 
 This package integrates the following external components:
 
-| **Component**       | **Repository**                                      | **License**       |
-| ------------------- | --------------------------------------------------- | ----------------- |
-| UIO DMA Driver      | https://github.com/nxp-imx-support/uiodma-driver    | GPL-2.0-only      |
-| Optimum-Ara         | [Coming Soon]                                       | Apache-2.0        |
-| GStreamer Plugins   | [Coming Soon]                                       | LGPL-2.1-or-later |
+| **Component**     | **Repository**                                              | **License**       |
+| ----------------- | ----------------------------------------------------------- | ----------------- |
+| UIO DMA Driver    | https://github.com/nxp-imx-support/uiodma-driver            | GPL-2.0-only      |
+| Optimum-Ara       | https://github.com/nxp/optimum-ara                          | Apache-2.0        |
+| GStreamer Plugins | https://github.com/nxp-imx-support/gstreamer-plugins-ara240 | LGPL-2.1-or-later |
 
 ---
 
@@ -177,12 +176,14 @@ chmod +x imx-nxp-ara2-2.1.1-063d56c.bin
 After executing the binary, you will be prompted to accept the LA_OPT_NXP_Software_License to proceed with the installation.
 
 > [!CAUTION]
+>
 > - This method allows installation of the ARA240 SDK on any NXP device; however, it does not guarantee that the particular target is officially supported.
 > - The `-063d56c` suffix corresponds to BSP-LF6-18.20_2.0.0. Please consult the **Release Notes** documentation to verify the binary version compatible with your specific BSP.
 
 </details>
 
 The installation process will:
+
 - ⚙️ Configure systemd service (`rt-sdk-ara2.service`) for automatic startup
 - 💾 Expand system partition to maximize storage capacity
 - 🔧 Set up udev rules for automatic Ara240 NPU detection and hot-plug support
@@ -296,6 +297,7 @@ ara2_metrics.sh
 ```
 
 **Interactive menu options:**
+
 - **1** - Print NPU utilization continuously
 - **2** - Print device information
 - **3** - Print DRAM information
@@ -319,6 +321,7 @@ chip_info.sh
 ```
 
 **Displays:**
+
 - Chip ID and revision
 - Bus ID and interface type (PCIe)
 - System, NPU, and DDR frequencies
@@ -366,24 +369,24 @@ This command shows all supported models available to fetch from Hugging Face.
 <details>
 <summary>YOLOv8</summary>
 
-   - detection:
-      - yolov8n
-      - yolov8s
-      - yolov8m
-      - yolov8l
-      - yolov8x
-   - pose:
-      - yolov8n-pose
-      - yolov8s-pose
-      - yolov8m-pose
-      - yolov8l-pose
-      - yolov8x-pose
-   - segmentation:
-      - yolov8n-seg
-      - yolov8s-seg
-      - yolov8m-seg
-      - yolov8l-seg
-      - yolov8x-seg
+- detection:
+  - yolov8n
+  - yolov8s
+  - yolov8m
+  - yolov8l
+  - yolov8x
+- pose:
+  - yolov8n-pose
+  - yolov8s-pose
+  - yolov8m-pose
+  - yolov8l-pose
+  - yolov8x-pose
+- segmentation:
+  - yolov8n-seg
+  - yolov8s-seg
+  - yolov8m-seg
+  - yolov8l-seg
+  - yolov8x-seg
 
 </details>
 
@@ -392,7 +395,7 @@ This command shows all supported models available to fetch from Hugging Face.
 Run performance benchmarks on downloaded models:
 
 > [!WARNING]
-> We strongly recommend using an SSH connection rather than *console/UART/debug cable* communication when running the benchmark. Console-based connections can introduce significant performance degradation due to the high volume of printed output, leading to unrealistic or misleading benchmark results.
+> We strongly recommend using an SSH connection rather than _console/UART/debug cable_ communication when running the benchmark. Console-based connections can introduce significant performance degradation due to the high volume of printed output, leading to unrealistic or misleading benchmark results.
 
 ```bash
 run_model_perf.sh
@@ -425,6 +428,7 @@ Available Models in detection
 **Customizing benchmark parameters:**
 
 By default, the script runs with:
+
 - **Iterations:** 1000
 - **Batch size:** 10
 
@@ -438,11 +442,13 @@ BATCH_SIZE="0.batch_size=10"        # Change to desired batch size
 **Results location:**
 
 Performance logs are saved to:
+
 ```
 /usr/share/rt-sdk-ara240/saved_logs/<category>_<model>_perf_log.txt
 ```
 
 Device statistics are dumped to:
+
 ```
 /usr/share/rt-sdk-ara240/saved_logs/device_stats/
 ```
@@ -450,7 +456,9 @@ Device statistics are dumped to:
 ---
 
 ## 🔌 Automatic Device Management
+
 The `rt-sdk-ara2.service` is enabled by default and handles:
+
 - Loading the `uiodma` kernel driver
 - Performing hardware bringup
 - Launching the proxy daemon
@@ -460,12 +468,14 @@ The SDK includes automatic device detection and management through udev rules an
 ### How It Works
 
 When an Ara240 device is connected (PCIe or USB):
+
 1. **udev** detects the device and triggers the handler script
 2. The handler automatically starts the `ara2-device.target`
 3. The target brings up the `rt-sdk-ara2.service`
 4. The service loads the driver, performs hardware bringup, and launches the proxy daemon
 
 When an Ara240 device is disconnected:
+
 1. **udev** detects the removal
 2. If no other Ara240 devices remain, the service and target are stopped automatically
 3. If other devices remain, the service is restarted to reconfigure
@@ -481,22 +491,28 @@ aam {enable|disable|status}
 **Commands:**
 
 **Enable automatic management (default):**
+
 ```bash
 sudo aam enable
 ```
+
 Devices will be automatically detected and managed via udev rules.
 
 **Disable automatic management:**
+
 ```bash
 sudo aam disable
 ```
+
 Switches to manual control mode. You must manually start/stop services:
+
 ```bash
 sudo systemctl start ara2-device.target
 sudo systemctl stop ara2-device.target
 ```
 
 **Check current status:**
+
 ```bash
 aam status
 ```
@@ -536,31 +552,37 @@ ara2-device.target (keeps target alive)
 ### Service Operations
 
 **Check service/target status:**
+
 ```bash
 systemctl status <rt-sdk-ara2.service|ara2-device.target> --no-pager -l
 ```
 
 **Start the Ara2 stack:**
+
 ```bash
 systemctl start ara2-device.target
 ```
 
 **Stop the Ara2 stack:**
+
 ```bash
 systemctl stop ara2-device.target
 ```
 
 **Restart the service:**
+
 ```bash
 systemctl restart ara2-device.target
 ```
 
 **View detailed logs:**
+
 ```bash
 journalctl -u rt-sdk-ara2.service -f
 ```
 
 **View udev event logs:**
+
 ```bash
 tail -f /var/log/ara2-udev-events.log
 ```
@@ -568,11 +590,13 @@ tail -f /var/log/ara2-udev-events.log
 ### Enable/Disable Automatic Startup
 
 **Disable automatic startup on boot:**
+
 ```bash
 aam disable
 ```
 
 **Re-enable automatic startup:**
+
 ```bash
 aam enable
 ```
@@ -588,6 +612,7 @@ The SDK includes Python bindings for the DVAPI (DeepVision API):
 **Location:** `/usr/share/rt-sdk-ara240_2.1.1/include/dvapi.py`
 
 **Key classes and methods:**
+
 - `DVSession` - Session management for Ara240 NPU
 - `DVModel` - Model loading and management
 - `DVEndpoint` - Endpoint (device) management
@@ -604,6 +629,7 @@ Optimum-Ara is a framework for running Large Language Models (LLMs) and Vision-L
 **License:** Apache-2.0
 
 **Supported models:**
+
 - **LLMs:** Qwen2.5-7B-Instruct, Qwen2.5-Coder-1.5B
 - **VLMs:** Qwen2.5-VL-7B-Instruct
 
@@ -622,12 +648,13 @@ The package includes a custom GStreamer plugin optimized for zero-copy video inf
 **Name:** libgstdvInf
 
 **Properties:**
-   - Unified inference plugin
-   - Handles image preprocessing (resizing, normalization, color conversion)
-   - Executes inference on Ara240 NPU
-   - Manages model loading and execution
-   - Processes inference results
-   - Zero-copy buffer operations for optimal performance
+
+- Unified inference plugin
+- Handles image preprocessing (resizing, normalization, color conversion)
+- Executes inference on Ara240 NPU
+- Manages model loading and execution
+- Processes inference results
+- Zero-copy buffer operations for optimal performance
 
 ---
 
@@ -671,27 +698,33 @@ rmmod uiodma
 The Debian package installs components to the following locations:
 
 ### Binaries and Scripts
+
 - `/usr/bin/aam` - Ara2 Auto Management utility
 - `/usr/share/rt-sdk-ara240_2.1.1/scripts/` - All utility scripts
 - `/usr/share/rt-sdk-ara240_2.1.1/scripts/ara2_udev_handler.sh` - Udev event handler
 - `/usr/share/rt-sdk-ara240_2.1.1/scripts/ara2_metrics_bin/` - Hardware metrics binary
 
 ### Libraries
+
 - `/usr/lib/libaraclient_aarch64.so` - Ara client library
 - `/usr/lib/libara_vision_inference.so*` - Vision inference library
 - `/usr/lib/gstreamer-1.0/` - GStreamer plugins for video inference pipelines
 
 ### Headers and Python Modules
+
 On `-dev` Debian Package only comes C/C++ headers file.
+
 - `/usr/include/sdk_ara/` - C/C++ headers (dvapi.h, dv_status_codes.h, etc.)
 - `/usr/share/rt-sdk-ara240_2.1.1/include/` - Python bindings (dvapi.py)
 
 ### Runtime Artifacts
+
 - `/usr/share/rt-sdk-ara240_2.1.1/optimum-ara/` - Optimum-Ara framework, examples, and documentation
 - `/usr/share/rt-sdk-ara240_2.1.1/hw_utils/` - Hardware utilities and firmware
 - `/usr/share/rt-sdk-ara240_2.1.1/proxy/` - Proxy daemon
 
 ### System Configuration
+
 - `/etc/systemd/system/rt-sdk-ara2.service` - Runtime systemd service
 - `/etc/systemd/system/ara2-device.target` - Device aggregator target
 - `/etc/udev/rules.d/99-ara2.rules` - Udev rules for NPU detection
@@ -699,15 +732,19 @@ On `-dev` Debian Package only comes C/C++ headers file.
 - `/etc/rt-sdk-ara240/` - Additional configuration files (proxy_config.yaml, cnn_config.yaml)
 
 ### Drivers
+
 - ` /lib/modules/$(uname -r)/extra/uiodma.ko` - UIO DMA driver location
-   - `uiodma.ko` - Kernel module for PCIe communication
+  - `uiodma.ko` - Kernel module for PCIe communication
 
 ### Logs
+
 - `/var/log/ara2-udev-events.log` - Udev event handler logs
 - `/usr/share/rt-sdk-ara240/saved_logs/rt-sdk-ara2_logs.txt` - Service logs
 
 ### Documentation
+
 On `-doc` Debian Package.
+
 - `/usr/share/doc/rt-sdk-ara2/LICENSE.txt` - License information
 
 > [!NOTE]
@@ -726,7 +763,6 @@ On `-doc` Debian Package.
 | Debian package     | v2.1.1      |
 | Firmware (raw)     | 131072      |
 | Firmware (display) | 2.0.0       |
-
 
 ### Related Documentation
 
