@@ -624,7 +624,7 @@ Optimum-Ara is a framework for running Large Language Models (LLMs) and Vision-L
 
 **Location:** `/usr/share/rt-sdk-ara240_2.1.1/optimum-ara/`
 
-**Repository:** [Link to Optimum-Ara repository - Coming Soon](www.example.com)
+**Repository:** https://github.com/nxp/Optimum-Ara
 
 **License:** Apache-2.0
 
@@ -641,7 +641,7 @@ The package includes a custom GStreamer plugin optimized for zero-copy video inf
 
 **Location:** `/usr/lib/gstreamer-1.0/`
 
-**Repository:** [Coming Soon]
+**Repository:** https://github.com/nxp-imx-support/gstreamer-plugins-ara240
 
 **License:** LGPL-2.1-or-later
 
